@@ -18,14 +18,14 @@ def process_text():
 
     # Tokenization using NLTK
     nltk_tokens = nltk.word_tokenize(text)
+    processed_text = ' '.join(nltk_tokens)  # Join tokens into a single string
 
     # Named Entity Recognition using spaCy
     spacy_doc = nlp(text)
     entities = [(ent.text, ent.label_) for ent in spacy_doc.ents]
 
     return jsonify({
-        'nltk_tokens': nltk_tokens,
-        'spacy_entities': entities
+        'text': processed_text
     })
 
 if __name__ == "__main__":

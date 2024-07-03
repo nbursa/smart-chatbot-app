@@ -13,11 +13,8 @@
 import { defineComponent, ref } from 'vue';
 import MessageList from './MessageList.vue';
 import MessageInput from './MessageInput.vue';
-
-interface Message {
-  id: number;
-  text: string;
-}
+import axios from 'axios';
+import { Message } from '../types';
 
 export default defineComponent({
   name: 'ChatApp',
@@ -27,11 +24,29 @@ export default defineComponent({
   },
   setup() {
     const messages = ref<Message[]>([
-      { id: 1, text: 'Hello! How can I help you today?' },
+      { id: 1, text: 'Hello! How can I help you today?', meta: { sender: 'ai', timestamp: new Date() } },
     ]);
 
-    const sendMessage = (message: string) => {
-      messages.value.push({ id: messages.value.length + 1, text: message });
+    const sendMessage = async (message: string) => {
+      try {
+        const newMessage: Message = {
+          id: messages.value.length + 1,
+          text: message,
+          meta: { sender: 'user', timestamp: new Date() }
+        };
+        messages.value.push(newMessage);
+
+        const response = await axios.post<Message>(`${import.meta.env.VITE_API_URL}/process-text`,  { text: message });
+
+        if (response.data) {
+          const aiResponse: Message = response.data;
+          messages.value.push(aiResponse);
+        } else {
+          console.error('Invalid response format from server:', response);
+        }
+      } catch (error) {
+        console.error('Error sending message:', error);
+      }
     };
 
     return {
