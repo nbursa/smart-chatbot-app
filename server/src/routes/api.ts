@@ -21,14 +21,13 @@ router.post('/process-text', async (req: Request, res: Response) => {
         timestamp: new Date(),
       },
     });
-    console.log('User message:', userMessage);
     await userMessage.save();
 
     const aiResponse = await axios.post<{ text: string }>(process.env.ML_API_URL!, { text });
-    console.log('AI response:', aiResponse.data);
+
     const newAIMessage = new Message({
       id: Date.now() + 1,
-      text: aiResponse.data.text || 'No response',
+      text: aiResponse.data.text,
       meta: {
         sender: 'ai',
         timestamp: new Date(),
