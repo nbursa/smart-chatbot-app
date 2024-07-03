@@ -1,34 +1,27 @@
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import axios from 'axios';
+import cors from 'cors';
+import apiRoutes from './routes/api';
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5006;
 
+app.use(cors());
 app.use(express.json());
+app.use('/api', apiRoutes);
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Server is running');
 });
 
-app.post('/process-text', async (req: Request, res: Response) => {
-    const { text } = req.body;
-
-    if (!text) {
-        return res.status(400).send('No text provided');
-    }
-
-    try {
-        const response = await axios.post('http://localhost:8000/process', { text });
-        res.json(response.data);
-    } catch (error) {
-        res.status(500).send('Error processing text');
-    }
-});
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+mongoose.connect(process.env.DATABASE_URL!).then(() => {
+    console.log('Connected to MongoDB');
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
+}).catch(err => {
+    console.error('Failed to connect to MongoDB', err);
 });
