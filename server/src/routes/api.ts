@@ -6,7 +6,7 @@ const router = Router();
 
 router.post('/process-text', async (req: Request, res: Response) => {
   const { text } = req.body;
-
+  console.log(req.body);
   if (!text) {
     console.error('No text provided');
     return res.status(400).send('No text provided');
