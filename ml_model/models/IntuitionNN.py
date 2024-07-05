@@ -31,3 +31,11 @@ class IntuitionNN(nn.Module):
             x_prev_prev = x_prev if i > 0 else x
             x_prev = x
         return x, intuition_output
+
+    def train_step(self, inputs, targets, optimizer, criterion):
+        optimizer.zero_grad()
+        outputs, _ = self.forward(inputs, iteration=0)  # No iteration count needed for training
+        loss = criterion(outputs, targets)
+        loss.backward()
+        optimizer.step()
+        return loss.item()
