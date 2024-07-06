@@ -2,3 +2,4 @@
 __pycache__/
 *.pyc
 /data/*
+/fine_tuned_model/model.safetensors
