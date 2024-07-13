@@ -5,7 +5,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 from flask import Flask, request, jsonify
 from transformers import BertTokenizer, BertModel, BertForSequenceClassification, GPT2Tokenizer, GPT2LMHeadModel, set_seed
-from models.IntuitionNN import IntuitionNN
+from models.IntuitionNN import IntuitionNN, BERTIntuitionModel
+
 from src.conversation import Conversation
 from src.utils import log_conversation
 
@@ -13,19 +14,22 @@ from src.utils import log_conversation
 nltk.download('punkt')
 nlp = spacy.load("en_core_web_sm")
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-bert_model = BertModel.from_pretrained('bert-base-uncased')
-intent_model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=5)
 gpt_tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 gpt_model = GPT2LMHeadModel.from_pretrained('gpt2')
 set_seed(42)
 
-# Define the IntuitionNN model
-input_size = 768
-layer_sizes = [128, 64, 32]
-intuition_size = 10
-model = IntuitionNN(input_size=input_size, layer_sizes=layer_sizes, intuition_size=intuition_size)
-optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
-criterion = nn.CrossEntropyLoss()
+# Define the BERTIntuitionModel
+num_labels = 5  # Adjust this based on your number of intents
+model = BERTIntuitionModel(num_labels)
+
+# Load the fine-tuned model if available
+try:
+    model.load_state_dict(torch.load("fine_tuned_intuition_model.pth"))
+    print("Loaded fine-tuned model")
+except:
+    print("No fine-tuned model found, using initial model")
+
+optimizer = torch.optim.Adam(model.parameters(), lr=2e-5)
 
 app = Flask(__name__)
 
@@ -40,12 +44,14 @@ def process_text():
     if not text:
         return jsonify({'error': 'No text provided'}), 400
 
-    # Recognize intent
-    inputs = tokenizer(text, return_tensors='pt')
+    # Tokenize input
+    inputs = tokenizer(text, return_tensors='pt', padding=True, truncation=True, max_length=128)
+    
+    # Get intent using BERTIntuitionModel
+    model.eval()
     with torch.no_grad():
-        embeddings = bert_model(**inputs).last_hidden_state[:, 0, :]
-        intent_logits = intent_model(**inputs).logits
-        intent_index = torch.argmax(intent_logits, dim=1).item()
+        outputs, _, _ = model(inputs['input_ids'], inputs['attention_mask'], 0)
+        intent_index = torch.argmax(outputs, dim=1).item()
 
     # Generate response using GPT-2 with context
     context = conversations.get_context(user_id)
@@ -62,8 +68,14 @@ def process_text():
     conversations.update_state(user_id, 'User', text)
     conversations.update_state(user_id, 'AI', response)
 
-    # Train IntuitionNN
-    model.train_step(embeddings, torch.tensor([intent_index]), optimizer, criterion)
+    # Train BERTIntuitionModel
+    model.train()
+    optimizer.zero_grad()
+    outputs, intuition_output, layer_outputs = model(inputs['input_ids'], inputs['attention_mask'], 0)
+    loss = F.cross_entropy(outputs, torch.tensor([intent_index]))
+    loss.backward()
+    optimizer.step()
+    model.intuition_nn.compare_and_adjust(layer_outputs, intuition_output)
 
     # Log conversation
     log_conversation(user_text=text, ai_text=response, intent=intent_index)
