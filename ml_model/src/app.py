@@ -4,8 +4,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from flask import Flask, request, jsonify
-from transformers import BertTokenizer, BertModel, BertForSequenceClassification, GPT2Tokenizer, GPT2LMHeadModel, set_seed
-from models.IntuitionNN import IntuitionNN, BERTIntuitionModel
+from transformers import BertTokenizer, GPT2Tokenizer, GPT2LMHeadModel, set_seed
+from models.BERTIntuitionModel import BERTIntuitionModel
 
 from src.conversation import Conversation
 from src.utils import log_conversation
@@ -19,14 +19,14 @@ gpt_model = GPT2LMHeadModel.from_pretrained('gpt2')
 set_seed(42)
 
 # Define the BERTIntuitionModel
-num_labels = 5  # Adjust this based on your number of intents
+num_labels = 5
 model = BERTIntuitionModel(num_labels)
 
 # Load the fine-tuned model if available
 try:
-    model.load_state_dict(torch.load("fine_tuned_intuition_model.pth"))
+    model.load_state_dict(torch.load("fine_tuned_intuition_model_final.pth"))
     print("Loaded fine-tuned model")
-except:
+except FileNotFoundError:
     print("No fine-tuned model found, using initial model")
 
 optimizer = torch.optim.Adam(model.parameters(), lr=2e-5)
