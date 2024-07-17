@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 from transformers import BertModel
-from .IntuitionNN import IntuitionNN
+from IntuitionNN import IntuitionNN
 
 class BERTIntuitionModel(nn.Module):
     def __init__(self, num_labels):

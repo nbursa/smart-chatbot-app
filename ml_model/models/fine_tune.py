@@ -21,7 +21,7 @@ def create_custom_tokenizer(vocab_file):
     return BertTokenizer(vocab_file=vocab_file, do_lower_case=True)
 
 # Load custom tokenizer
-tokenizer = create_custom_tokenizer('fine_tuned_model/vocab.txt')
+tokenizer = create_custom_tokenizer('vocab.txt')
 
 # Create a sample dataset (replace with your actual dataset)
 sample_texts = [
@@ -37,7 +37,7 @@ sample_texts = [
     "Translate 'hello' to Spanish"
 ]
 
-sample_labels = [0, 1, 2, 3, 4, 0, 1, 2, 3, 4]  # Adjust according to your dataset
+sample_labels = [0, 1, 2, 3, 4, 0, 1, 2, 3, 4]
 
 # Shuffle the samples
 combined = list(zip(sample_texts, sample_labels))
@@ -62,7 +62,7 @@ total_steps = len(dataloader) * 3  # Assuming 3 epochs
 scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=0, num_training_steps=total_steps)
 
 # Prepare directory for saving model
-save_dir = 'fine_tuned_model'
+save_dir = '../fine_tuned_model'
 os.makedirs(save_dir, exist_ok=True)
 
 # Training loop
@@ -96,7 +96,7 @@ for epoch in range(3):
         epoch_loss += loss.item()
 
         if step % 1 == 0:  # Print every step, adjust as needed
-            print(f"Step {step}/{len(dataloader)}, Loss: {loss.item():.4f}, Step Time: {step_time:.2f}s")
+            print(f"Step {step+1}/{len(dataloader)}, Loss: {loss.item():.4f}, Step Time: {step_time:.2f}s")
 
     epoch_end_time = time.time()
     epoch_time = epoch_end_time - epoch_start_time
@@ -111,10 +111,10 @@ torch.save(model.state_dict(), final_model_path)
 tokenizer.save_pretrained(save_dir)
 
 # Save vocab.txt in the fine_tuned_model directory
-vocab_file_path = os.path.join(save_dir, 'vocab.txt')
-with open(vocab_file_path, 'w', encoding='utf-8') as f:
-    for word in tokenizer.get_vocab().keys():
-        f.write(word + '\n')
+# vocab_file_path = os.path.join(save_dir, 'vocab.txt')
+# with open(vocab_file_path, 'w', encoding='utf-8') as f:
+#     for word in tokenizer.get_vocab().keys():
+#         f.write(word + '\n')
 
 print("Training completed. Final model and vocab.txt saved.")
 
@@ -144,4 +144,4 @@ plt.show()
 
 # Print final metrics
 print("Final Average Loss:", epoch_losses[-1])
-print("Intuition Coefficient Adjustments:", intuition_adjustments[-1])
+# print("Intuition Coefficient Adjustments:", intuition_adjustments[-1])
