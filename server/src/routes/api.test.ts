@@ -6,15 +6,12 @@ import apiRoutes from './api';
 import Message from '../models/Message';
 import axios from 'axios';
 
-// Load environment variables
 dotenv.config();
 
-// Create and configure the Express app
 const app = express();
 app.use(express.json());
 app.use('/api', apiRoutes);
 
-// Mock the Message model
 jest.mock('../models/Message', () => {
   return {
     __esModule: true,
