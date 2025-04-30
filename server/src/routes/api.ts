@@ -1,15 +1,15 @@
-import { Router, Request, Response } from 'express';
-import axios, { AxiosError } from 'axios';
-import Message from '../models/Message';
+import { Router, Request, Response } from "express";
+import axios, { AxiosError } from "axios";
+import Message from "../models/Message";
 
 const router = Router();
 
-router.post('/process-text', async (req: Request, res: Response) => {
+router.post("/process-text", async (req: Request, res: Response) => {
   const { text } = req.body;
 
   if (!text) {
-    console.error('No text provided');
-    return res.status(400).send('No text provided');
+    console.error("No text provided");
+    return res.status(400).send("No text provided");
   }
 
   try {
@@ -17,19 +17,22 @@ router.post('/process-text', async (req: Request, res: Response) => {
       id: Date.now(),
       text: text,
       meta: {
-        sender: 'user',
+        sender: "user",
         timestamp: new Date(),
       },
     });
     await userMessage.save();
 
-    const aiResponse = await axios.post<{ text: string }>(process.env.ML_API_URL!, { text });
+    const aiResponse = await axios.post<{ text: string }>(
+      process.env.ML_API_URL!,
+      { text }
+    );
 
     const newAIMessage = new Message({
       id: Date.now() + 1,
       text: aiResponse.data.text,
       meta: {
-        sender: 'ai',
+        sender: "ai",
         timestamp: new Date(),
       },
     });
@@ -40,16 +43,19 @@ router.post('/process-text', async (req: Request, res: Response) => {
     if (axios.isAxiosError(error)) {
       const axiosError = error as AxiosError;
       if (axiosError.response) {
-        console.error('Server responded with non-success status:', axiosError.response.data);
+        console.error(
+          "Server responded with non-success status:",
+          axiosError.response.data
+        );
       } else if (axiosError.request) {
-        console.error('No response received:', axiosError.request);
+        console.error("No response received:", axiosError.request);
       } else {
-        console.error('Error setting up the request:', axiosError.message);
+        console.error("Error setting up the request:", axiosError.message);
       }
     } else {
-      console.error('Unexpected error:', error);
+      console.error("Unexpected error:", error);
     }
-    res.status(500).send('Error processing text');
+    res.status(500).send("Error processing text");
   }
 });
 

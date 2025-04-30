@@ -1,29 +1,28 @@
-import request from 'supertest';
-import express from 'express';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import apiRoutes from './api';
-import Message from '../models/Message';
-import axios from 'axios';
+import request from "supertest";
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import apiRoutes from "./api";
+import axios from "axios";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use('/api', apiRoutes);
+app.use("/api", apiRoutes);
 
-jest.mock('../models/Message', () => {
+jest.mock("../models/Message", () => {
   return {
     __esModule: true,
     default: jest.fn().mockImplementation(() => ({
-      save: jest.fn().mockResolvedValue({})
-    }))
+      save: jest.fn().mockResolvedValue({}),
+    })),
   };
 });
 
-jest.mock('axios');
+jest.mock("axios");
 
-describe('POST /api/process-text', () => {
+describe("POST /api/process-text", () => {
   beforeAll(async () => {
     await mongoose.connect(process.env.DATABASE_URL!, {});
   });
@@ -36,36 +35,37 @@ describe('POST /api/process-text', () => {
     jest.clearAllMocks();
   });
 
-  it('should return a response with AI generated text', async () => {
-    const aiResponse = { text: 'AI response' };
-    (axios.post as jest.Mock).mockResolvedValue({ data: aiResponse });
+  it("should return a response with AI generated text", async () => {
+    const aiResponse = { text: "AI response" };
+    (axios.post as jest.MockedFunction<typeof axios.post>).mockResolvedValue({
+      data: aiResponse,
+    });
 
     const response = await request(app)
-      .post('/api/process-text')
-      .send({ text: 'Hello' });
+      .post("/api/process-text")
+      .send({ text: "Hello" });
 
     expect(response.status).toBe(200);
-    expect(response.body.text).toBe('AI response');
+    expect(response.body).toEqual({ text: "AI response" });
   });
 
-  it('should return 400 if no text is provided', async () => {
-    const response = await request(app)
-      .post('/api/process-text')
-      .send({});
+  it("should return 400 if no text is provided", async () => {
+    const response = await request(app).post("/api/process-text").send({});
 
     expect(response.status).toBe(400);
-    expect(response.text).toBe('No text provided');
+    expect(response.text).toBe("No text provided");
   });
 
-  it('should handle errors from the AI API', async () => {
-    (axios.post as jest.Mock).mockRejectedValue(new Error('AI API error'));
+  it("should handle errors from the AI API", async () => {
+    (axios.post as jest.MockedFunction<typeof axios.post>).mockRejectedValue(
+      new Error("AI API error")
+    );
 
     const response = await request(app)
-      .post('/api/process-text')
-      .send({ text: 'Hello' });
+      .post("/api/process-text")
+      .send({ text: "Hello" });
 
     expect(response.status).toBe(500);
-    expect(response.text).toBe('Error processing text');
+    expect(response.text).toBe("Error processing text");
   });
 });
-
