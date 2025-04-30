@@ -102,7 +102,7 @@ In `smart-chatbot-app`, DIAN is integrated via a custom PyTorch module inside th
 - **Introspection**: Intuition coefficients represent a soft measure of internal model alignment
 - **Meta-awareness Simulation**: The system mimics a sense of “confidence” in its own inference process
 
-#### compare_and_adjust Logic
+#### compare-and-adjust Logic
 
 ![Compare and Adjust](https://raw.githubusercontent.com/nbursa/smart-chatbot-app/main/docs/images/compare_and_adjust.png)
 
