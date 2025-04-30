@@ -9,10 +9,10 @@
 [![Node.js](https://img.shields.io/badge/node.js-18+-lightgreen)](https://nodejs.org/)
 [![MongoDB](https://img.shields.io/badge/database-mongodb-4ea94b?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 
+[Architecture](docs/architecture.md) • [AI Design](docs/ai-design.md) • [Contributing](CONTRIBUTING.md) • [License](LICENSE)
+
 Published on Ready Tensor:  
 [Smart Chatbot App – Adaptive NLP Agent with Intuition Modeling (DIAN)](https://app.readytensor.ai/publications/smart-chatbot-app-adaptive-nlp-agent-with-intuition-modeling-dian-wLYPCu6oX4Ce)
-
-[Architecture](docs/architecture.md) • [AI Design](docs/ai-design.md) • [Contributing](CONTRIBUTING.md) • [License](LICENSE)
 
 A full-stack web application featuring a machine learning-powered chatbot with real-time interaction, adaptive inference, and dynamic learning mechanisms.
 
