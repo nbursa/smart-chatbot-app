@@ -52,9 +52,9 @@ git clone https://github.com/nbursa/smart-chatbot-app.git
 ### 2. Start the ML Backend (Flask + PyTorch)
 
 ```bash
-cd api
+cd model
 pip install -r requirements.txt
-python app.py
+python run.py
 ```
 
 ### 3. Start the Middleware Server (Node.js + Express)
