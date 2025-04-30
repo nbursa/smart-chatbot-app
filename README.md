@@ -18,7 +18,11 @@ A full-stack web application featuring a machine learning-powered chatbot with r
 
 ## Architecture
 
-<img src="https://raw.githubusercontent.com/nbursa/smart-chatbot-app/main/docs/images/full_architecture.png" width="500"/>
+<div align="center">
+  <img src="https://raw.githubusercontent.com/nbursa/smart-chatbot-app/main/docs/images/full_architecture.png" width="500"/>
+  <br/>
+  <sub><i>Figure: Full architecture of Smart Chatbot App (frontend → backend → NLP)</i></sub>
+</div>
 
 ## Features
 
@@ -115,7 +119,11 @@ This chatbot system is not just a conversational agent—it's an **interactive A
 
 ### DIAN Inference Flow
 
-<img src="https://raw.githubusercontent.com/nbursa/smart-chatbot-app/main/docs/images/DIAN_inference_flow.png" width="500"/>
+<div align="center">
+  <img src="https://raw.githubusercontent.com/nbursa/smart-chatbot-app/main/docs/images/DIAN_inference_flow.png" width="500"/>
+  <br/>
+  <sub><i>Figure: DIAN inference process with intuition-driven adaptation.</i></sub>
+</div>
 
 ## License
 
