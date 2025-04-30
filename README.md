@@ -9,9 +9,16 @@
 [![Node.js](https://img.shields.io/badge/node.js-18+-lightgreen)](https://nodejs.org/)
 [![MongoDB](https://img.shields.io/badge/database-mongodb-4ea94b?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 
+Published on Ready Tensor:  
+[Smart Chatbot App – Adaptive NLP Agent with Intuition Modeling (DIAN)](https://app.readytensor.ai/publications/smart-chatbot-app-adaptive-nlp-agent-with-intuition-modeling-dian-wLYPCu6oX4Ce)
+
 [Architecture](docs/architecture.md) • [AI Design](docs/ai-design.md) • [Contributing](CONTRIBUTING.md) • [License](LICENSE)
 
 A full-stack web application featuring a machine learning-powered chatbot with real-time interaction, adaptive inference, and dynamic learning mechanisms.
+
+## Architecture
+
+![System Diagram](https://raw.githubusercontent.com/nbursa/smart-chatbot-app/main/docs/images/full_architecture.png)
 
 ## Features
 
@@ -81,11 +88,19 @@ In `smart-chatbot-app`, DIAN is integrated via a custom PyTorch module inside th
 - During each forward pass, calculates a layer-wise difference and updates an `intuition_coefficients` tensor to reflect model confidence in its predictions
 - Supports online updates via lightweight backpropagation and coefficient refinement
 
+#### BERT + IntuitionNN Model Code
+
+![BERTIntuitionModel Code](https://raw.githubusercontent.com/nbursa/smart-chatbot-app/main/docs/images/bert_intuition_model.png)
+
 ### Key Features
 
 - **Online Adaptation**: The model updates itself after each prediction with minimal overhead
 - **Introspection**: Intuition coefficients represent a soft measure of internal model alignment
 - **Meta-awareness Simulation**: The system mimics a sense of “confidence” in its own inference process
+
+#### compare_and_adjust Logic
+
+![Compare and Adjust](https://raw.githubusercontent.com/nbursa/smart-chatbot-app/main/docs/images/compare_and_adjust.png)
 
 ### Purpose and Use Case
 
@@ -97,6 +112,10 @@ This chatbot system is not just a conversational agent—it's an **interactive A
 - Visualize evolving model dynamics (via logs and plots)
 
 > ❗ DIAN is still experimental. While promising, it is best suited for sandbox use, research, or internal tooling—not high-stakes production environments.
+
+### DIAN Inference Flow
+
+![DIAN Flow](https://raw.githubusercontent.com/nbursa/smart-chatbot-app/main/docs/images/DIAN_inference_flow.png)
 
 ## License
 
