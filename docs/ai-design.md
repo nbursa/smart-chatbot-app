@@ -1,11 +1,10 @@
-
-# 🧠 AI Design – Smart Chatbot App
+# AI Design – Smart Chatbot App
 
 This document explores the machine learning logic and adaptive mechanisms used in the Smart Chatbot App. The system blends classical intent classification with generative NLP and an experimental meta-learning layer (DIAN).
 
 ---
 
-## 📌 Goals
+## Goals
 
 - Combine BERT-based intent classification with GPT-2 response generation
 - Integrate a dynamic adaptation mechanism to simulate meta-awareness
@@ -14,11 +13,12 @@ This document explores the machine learning logic and adaptive mechanisms used i
 
 ---
 
-## 🧠 Architecture Overview
+## Architecture Overview
 
 ### Models
 
 - **BERTIntuitionModel**:
+
   - Uses `bert-base-uncased` as encoder
   - Outputs passed to `IntuitionNN`, a multilayer feedforward network
   - Classification logits + intuition outputs are returned
@@ -29,7 +29,7 @@ This document explores the machine learning logic and adaptive mechanisms used i
 
 ---
 
-## 🔄 Intuition Engine (DIAN)
+## Intuition Engine (DIAN)
 
 DIAN (Dynamic Input Activation Network) is a proprietary research prototype designed by Nenad Bursać. It enables adaptive control over model internals by comparing learned expectations with real-time input signals.
 
@@ -42,7 +42,7 @@ DIAN (Dynamic Input Activation Network) is a proprietary research prototype desi
 
 ---
 
-## 🧩 How it works
+## How it works
 
 1. Input is processed via BERT and pooled
 2. `IntuitionNN` processes the pooled output through several layers
@@ -53,7 +53,7 @@ DIAN (Dynamic Input Activation Network) is a proprietary research prototype desi
 
 ---
 
-## 📊 Logging & Visualization
+## Logging & Visualization
 
 - Logs every interaction to `data/conversation_logs/*.json`
 - Each log contains:
@@ -65,9 +65,10 @@ DIAN (Dynamic Input Activation Network) is a proprietary research prototype desi
 
 ---
 
-## 📌 Research Use
+## Research Use
 
 Ideal for:
+
 - Studying intuition-influenced model updates
 - Visualizing layer-wise behavioral change
 - Exploring how GPT output varies with context history
@@ -75,7 +76,7 @@ Ideal for:
 
 ---
 
-## 🧪 Limitations
+## Limitations
 
 - Not session-isolated (global context)
 - Online updates may destabilize long-term performance
@@ -83,7 +84,7 @@ Ideal for:
 
 ---
 
-## 🔬 Future Work
+## Future Work
 
 - Add attention monitoring over conversation context
 - Pre-train DIAN layer on synthetic intuition objectives

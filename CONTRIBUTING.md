@@ -1,10 +1,10 @@
-# 🤝 Contributing to Smart Chatbot App
+# Contributing to Smart Chatbot App
 
 Thank you for your interest in contributing to **Smart Chatbot App**! This project is an experimental AI system combining intent classification, generative dialogue, and adaptive neural components. All contributions—whether code, documentation, bug reports, or research ideas—are welcome.
 
 ---
 
-## 🛠 How to Contribute
+## How to Contribute
 
 ### 1. Fork the Repository
 
@@ -47,7 +47,7 @@ Then go to GitHub and open a pull request against the `main` branch.
 
 ---
 
-## 📦 Project Structure
+## Project Structure
 
 ```
 smart-chatbot-app/
@@ -60,13 +60,13 @@ smart-chatbot-app/
 
 ---
 
-## 🧪 Testing and Linting
+## Testing and Linting
 
 Please test your changes and follow clean code practices. Linting rules are coming soon.
 
 ---
 
-## 📜 License
+## License
 
 By contributing, you agree that your contributions will be licensed under the MIT License.
 

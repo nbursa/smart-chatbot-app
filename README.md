@@ -8,11 +8,11 @@
 [![Vue](https://img.shields.io/badge/frontend-vue_3-brightgreen)](client/)
 [![Flask](https://img.shields.io/badge/backend-flask-red)](api/)
 
-📄 [Architecture](docs/architecture.md) • 🤖 [AI Design](docs/ai-design.md) • 🤝 [Contributing](CONTRIBUTING.md) • ⚖️ [License](LICENSE)
+[Architecture](docs/architecture.md) • [AI Design](docs/ai-design.md) • [Contributing](CONTRIBUTING.md) • [License](LICENSE)
 
 A full-stack web application featuring a machine learning-powered chatbot with real-time interaction, adaptive inference, and dynamic learning mechanisms.
 
-## ✨ Features
+## Features
 
 - Frontend: Vue 3 SPA for interactive chat experience
 - Middleware: Node.js API layer with MongoDB for message persistence
@@ -21,7 +21,7 @@ A full-stack web application featuring a machine learning-powered chatbot with r
 - Contextual memory with conversation history from MongoDB
 - Custom meta-learning layer ("intuition") for self-adjustment
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **Frontend**: Vue 3, Axios, Tailwind CSS
 - **Middleware Server**: Node.js (Express), TypeScript, ts-node, MongoDB (via Mongoose)
@@ -29,7 +29,7 @@ A full-stack web application featuring a machine learning-powered chatbot with r
 - **Model**: BERT with custom Intuition Layer + GPT-2 for generation
 - **Others**: Python, JavaScript, HTML5, CSS3
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Clone the repository
 
@@ -61,7 +61,7 @@ npm install
 npm run dev
 ```
 
-## 🧠 Adaptive AI Layer with DIAN (Dynamic Input Activation Network)
+## Adaptive AI Layer with DIAN (Dynamic Input Activation Network)
 
 The `smart-chatbot-app` leverages a hybrid AI architecture that includes intent classification, generative modeling, and an experimental meta-learning component called **DIAN – Dynamic Input Activation Network**.
 
@@ -82,9 +82,9 @@ In `smart-chatbot-app`, DIAN is integrated via a custom PyTorch module inside th
 
 ### Key Features
 
-- 🔁 **Online Adaptation**: The model updates itself after each prediction with minimal overhead
-- 📊 **Introspection**: Intuition coefficients represent a soft measure of internal model alignment
-- 🧠 **Meta-awareness Simulation**: The system mimics a sense of “confidence” in its own inference process
+- **Online Adaptation**: The model updates itself after each prediction with minimal overhead
+- **Introspection**: Intuition coefficients represent a soft measure of internal model alignment
+- **Meta-awareness Simulation**: The system mimics a sense of “confidence” in its own inference process
 
 ### Purpose and Use Case
 
@@ -97,7 +97,7 @@ This chatbot system is not just a conversational agent—it's an **interactive A
 
 > ❗ DIAN is still experimental. While promising, it is best suited for sandbox use, research, or internal tooling—not high-stakes production environments.
 
-## 📄 License
+## License
 
 This project is open-source and available under the MIT License.
 

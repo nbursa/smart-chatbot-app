@@ -1,11 +1,10 @@
-
-# 🧱 System Architecture – Smart Chatbot App
+# System Architecture – Smart Chatbot App
 
 This document outlines the technical architecture of the `smart-chatbot-app` project. It is intended for developers and researchers interested in understanding how the system is structured and how its components interact.
 
 ---
 
-## 📐 High-Level Overview
+## High-Level Overview
 
 ```
 [ Vue 3 Frontend ]
@@ -19,7 +18,7 @@ This document outlines the technical architecture of the `smart-chatbot-app` pro
 
 ---
 
-## 🖥 Frontend (Vue 3 SPA)
+## Frontend (Vue 3 SPA)
 
 - Built using **Vue 3 + Vite**
 - Single-page application for chat interface
@@ -29,7 +28,7 @@ This document outlines the technical architecture of the `smart-chatbot-app` pro
 
 ---
 
-## 🔄 Middleware Layer (Node.js + TypeScript + MongoDB)
+## Middleware Layer (Node.js + TypeScript + MongoDB)
 
 - Express server that:
   - Receives user messages from frontend
@@ -47,7 +46,7 @@ This document outlines the technical architecture of the `smart-chatbot-app` pro
 
 ---
 
-## 🧠 ML Backend (Flask + PyTorch)
+## ML Backend (Flask + PyTorch)
 
 ### Technologies:
 
@@ -65,7 +64,7 @@ This document outlines the technical architecture of the `smart-chatbot-app` pro
 
 ---
 
-## 🧪 DIAN – Dynamic Input Activation Network
+## DIAN – Dynamic Input Activation Network
 
 DIAN is an experimental neural mechanism embedded in the BERT-based classifier. It enables **runtime adaptation of model behavior** based on current inputs and past activations.
 
@@ -85,7 +84,7 @@ DIAN is an experimental neural mechanism embedded in the BERT-based classifier. 
 
 ---
 
-## 🧪 Use Cases and Research Applications
+## Use Cases and Research Applications
 
 - Experimental adaptive chatbot behavior
 - Real-time model evolution visualization
@@ -95,7 +94,7 @@ DIAN is an experimental neural mechanism embedded in the BERT-based classifier. 
 
 ---
 
-## 📊 Data Storage
+## Data Storage
 
 - **MongoDB** is used to persist all user and AI messages
 - Messages include:
@@ -106,7 +105,7 @@ DIAN is an experimental neural mechanism embedded in the BERT-based classifier. 
 
 ---
 
-## 🚧 Known Limitations
+## Known Limitations
 
 - Session state is not isolated per user
 - Online updates are uncontrolled (no validation set)
@@ -114,10 +113,9 @@ DIAN is an experimental neural mechanism embedded in the BERT-based classifier. 
 
 ---
 
-## 🛠 Suggestions for Improvement
+## Suggestions for Improvement
 
 - Add user authentication and per-session memory
 - Visualize intuition coefficient drift over time
 - Implement input sanitation and validation
 - Add CLI tools for data exploration and replay
-
