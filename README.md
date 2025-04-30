@@ -2,11 +2,12 @@
 
 [![Status](https://img.shields.io/badge/status-experimental-yellow)](https://github.com/nbursa/smart-chatbot-app)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Vue 3](https://img.shields.io/badge/vue-3.x-42b883?logo=vue.js)](https://vuejs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/tailwindcss-3.x-38b2ac?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Python](https://img.shields.io/badge/python-3.10+-green.svg)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/backend-flask-red)](api/)
 [![Node.js](https://img.shields.io/badge/node.js-18+-lightgreen)](https://nodejs.org/)
 [![MongoDB](https://img.shields.io/badge/database-mongodb-4ea94b?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
-[![Vue](https://img.shields.io/badge/frontend-vue_3-brightgreen)](client/)
-[![Flask](https://img.shields.io/badge/backend-flask-red)](api/)
 
 [Architecture](docs/architecture.md) • [AI Design](docs/ai-design.md) • [Contributing](CONTRIBUTING.md) • [License](LICENSE)
 
