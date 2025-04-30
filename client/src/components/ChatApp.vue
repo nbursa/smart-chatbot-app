@@ -1,6 +1,11 @@
 <template>
-  <div class="flex flex-col max-w-3xl mx-auto bg-gray-900 text-gray-100">
-    <div class="flex-1 overflow-y-auto p-4">
+  <div
+    class="flex flex-col w-full max-w-xl max-h-[90vh] bg-gray-900 text-gray-100 border border-gray-700 rounded-lg overflow-hidden"
+  >
+    <div
+      ref="chatContainer"
+      class="flex-1 overflow-y-auto p-4 space-y-4 flex flex-col-reverse gap-4"
+    >
       <MessageList :messages="messages" />
     </div>
     <div class="p-4 border-t border-gray-700">
@@ -24,7 +29,11 @@ export default defineComponent({
   },
   setup() {
     const messages = ref<Message[]>([
-      { id: 1, text: 'Hello! How can I help you today?', meta: { sender: 'ai', timestamp: new Date() } },
+      {
+        id: 1,
+        text: 'Hello! How can I help you today?',
+        meta: { sender: 'ai', timestamp: new Date() },
+      },
     ]);
 
     const sendMessage = async (message: string) => {
@@ -32,11 +41,14 @@ export default defineComponent({
         const newMessage: Message = {
           id: messages.value.length + 1,
           text: message,
-          meta: { sender: 'user', timestamp: new Date() }
+          meta: { sender: 'user', timestamp: new Date() },
         };
         messages.value.push(newMessage);
 
-        const response = await axios.post<Message>(`${import.meta.env.VITE_API_URL}/process-text`,  { text: message });
+        const response = await axios.post<Message>(
+          `${import.meta.env.VITE_API_URL}/process-text`,
+          { text: message }
+        );
 
         if (response.data) {
           const aiResponse: Message = response.data;

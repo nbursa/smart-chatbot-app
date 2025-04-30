@@ -1,5 +1,7 @@
 <template>
-  <div class="max-h-screen flex items-center justify-center bg-gray-900 text-gray-100">
+  <div
+    class="w-full h-full overflow-hidden bg-gray-900 flex items-center justify-center"
+  >
     <ChatApp />
   </div>
 </template>
