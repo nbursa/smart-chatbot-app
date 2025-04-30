@@ -3,12 +3,12 @@ import torch
 from torch.utils.data import DataLoader
 from transformers import BertTokenizer, AdamW, get_linear_schedule_with_warmup
 import torch.nn.functional as F
-from BERTIntuitionModel import BERTIntuitionModel
-from IntentDataset import IntentDataset
 import random
 import time
 import matplotlib.pyplot as plt
 import numpy as np
+from BERTIntuitionModel import BERTIntuitionModel
+from IntentDataset import IntentDataset
 
 # Load vocabulary from file
 def load_vocab(vocab_file):
